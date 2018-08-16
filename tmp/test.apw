@@ -1,0 +1,4 @@
+String $test := 'test';
+Integer $what := 0;
+Double $warra := 0.5;
+Long $test = 0.694;

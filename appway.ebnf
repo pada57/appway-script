@@ -1,0 +1,173 @@
+script: 
+'Script'  
+    ( typeDef | structureDef | functionDef | statement)*   
+'End'
+
+typeDef: 
+'PrimitiveType' className ( 'extends' className )? 
+    'JavaType' fullClassName ';'  
+    (facetDef ';' | metadataDef ';')* 
+'End'
+
+structureDef := 
+'DataClass' className  ( 'extends' IDENTIFIER )? 
+    ( propertyDef ';' | methodDef | facetDef ';' | metadataDef ';')* 
+'End'
+
+functionDef:
+'Function' functionName '(' argumentList? ')' ':' ('Indexed' | 'Named' | 'None')? className
+'Begin'
+    statement*
+'End'
+
+methodDef:
+'ClassFunction' functionName '(' argumentList? ')' ':' ('Indexed' | 'Named' | 'None')? className
+'Begin'
+    statement*
+'End'
+
+propertyDef:
+'Property' '[' propertyName ',' className ',' ('Indexed | 'Named' | 'None') (',' commentText)? ']'
+
+facetDef:
+'Facet' '[' className ':' propertyName ',' ('comment'|'default'|'constraint') ',' expressionText ',' commentText ']'
+
+metadataDef:
+'MetaData' '[' nameText ',' valueText ']'
+
+argumentList:
+('Indexed | 'Named' | 'None')? className variableName (',' ('Indexed | 'Named' | 'None')? className variableName)
+
+statement:
+variableDef ';' | ifStatement | forStatement | whileStatement | returnStatement ';' | breakStatement ';' | expression ';'
+
+variableDef:
+('Local' | 'Global') variableName className ('Indexed | 'Named' | 'None')?
+
+ifStatement:
+'If' expression 'Then'
+    statement*
+('ElseIf' expression 'Then'
+    statement*
+)*
+('Else'
+    statement*
+)
+'End'
+
+forStatement:
+'For' expression 'Condition' expression 'Step' expression 'Do'
+    statement*
+'End'
+
+whileStatement:
+'While' expression 'Do'
+    statement*
+'End'
+
+returnStatement:
+'Return' expression
+
+breakStatement: 'Break'
+
+///////////////////////////////////////////////////////////////////////
+
+constantValue:
+NUM_INT | NUM_FLOAT | STRING | 'true' | 'false' | 'null' | 'void'
+
+primitiveElement:
+constantValue | valuePath | fullClassName | '(' expression ')'
+
+booleanNegation:=
+('!' | 'not')* primitiveElement
+
+signExpression:=
+'-' booleanNegation | '+' booleanNegation | booleanNegation
+
+multiplyingExpression:
+signExpression ( ('*' | '/' | '%' | 'mod' | 'div') signExpression )*
+
+addingExpression: 
+multiplyingExpression ( ('+' | '-') multiplyingExpression )*
+
+relationalExpression:
+addingExpression ( ('==' | '!=' | '<>' | '>' | '>=' | '<' | '<=' | ':=') addingExpression )*
+
+expression:
+relationalExpression ( ('and' | 'or' | 'isa' | 'hasa') relationalExpression )*
+
+expressionList:
+expression (',' expression)*
+
+/////////////////////////////////////////////////////////////////////////
+
+valuePath:=
+(variableName | functionCall) ( '.'  IDENTIFIER | '[' expression ']' | '(' expressionList? ')' | '{' expression '}' )* 
+
+/////////////////////////////////////////////////////////////////////////
+
+functionCall:
+functionName '(' expressionList? ')'
+
+/////////////////////////////////////////////////////////////////////////
+
+variableName: '$' IDENTIFIER
+
+functionName: IDENTIFIER
+
+className: IDENTIFIER
+
+propertyName: IDENTIFIER
+
+fullClassName: IDENTIFIER ('.' IDENTIFIER)*
+
+expressionText: STRING
+
+commentText: STRING
+
+nameText: STRING
+
+valueText: STRING
+
+/////////////////////////////////////////////////////////////////////////
+
+NUM_INT: '0'..'9' ('0'..'9')*
+
+NUM_FLOAT: ('0'..'9')+ '.' ( ('0'..'9')+ )?
+
+IDENTIFIER:
+('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*
+
+STRING:
+ '\"'
+ ( ~('\"'|'\\')
+ | ESCAPE_SEQUENCE
+ )*
+ '\"'
+ |
+ '\''
+ ( ~('\''|'\\')
+ | ESCAPE_SEQUENCE
+ )*
+ '\''
+  ;
+
+COMMENT:
+ '//' (~('\n'|'\r'))*  | '/*' (.)* '*/' 
+
+ESCAPE_SEQUENCE
+'\\' 'b'
+| '\\' 't'
+| '\\' 'n'
+| '\\' 'f'
+| '\\' 'r'
+| '\\' '\"'
+| '\\' '\''
+| '\\' '\\'
+| UNICODE_CHAR
+
+UNICODE_CHAR: '\\' 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT
+
+HEX_DIGIT: '0'..'9'|'a'..'f'|'A'..'F'
+
+WS: (' '|'\n'|'\r'|'\t')+

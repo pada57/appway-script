@@ -1,0 +1,26 @@
+{
+    "name": "appway",
+    "displayName": "appway script",
+    "description": "Appway Script Language support",
+    "version": "0.0.1",
+    "publisher": "SJ",
+    "engines": {
+        "vscode": "*"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "appway",
+            "aliases": ["Appway Script", "appway-script"],
+            "extensions": ["apws", "appway", "apw", "appwaysc"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "appway",
+            "scopeName": "source.appway",
+            "path": "./syntaxes/appway.tmLanguage.json"
+        }]
+    }
+}

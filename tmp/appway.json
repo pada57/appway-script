@@ -1,0 +1,56 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Appway Script",
+	"scopeName": "source.appway",
+	"patterns": [{
+			"include": "#code"
+		},
+		{
+			"include": "#strings"
+		}
+	],
+	"repository": {
+		"code": {
+			"patterns": [{
+				"include": "#keywords"
+			}]
+		},
+		"keywords": {
+			"patterns": [{
+					"name": "keyword.general.appway",
+					"match": "\\b(Script|Return|Begin|End|DataClass|Function|extends|null|void|MetaData|Property|ClassFunction)\\b"
+				},
+				{
+					"name": "keyword.control.appway",
+					"match": "\\b(For|Condition|Step|Do|If|Then|Else|ElseIf|While||Break)\\b"
+				},
+				{
+					"name": "keyword.operator.assignment.appway",
+					"match": "(:=)"
+				},
+				{
+					"name": "keyword.operator.arithmetic.appway",
+					"match": "(\\-|\\+|\\*|\\/|%)"
+				},
+				{
+					"name": "keyword.operator.logical.appway",
+					"match": "(!|&&|\\|\\|)"
+				},
+				{
+					"name": "keyword.reserved",
+					"match": "\\b(Local|Global|Indexed|Named|Nothing|None|true|false)\\b"
+				}
+			]
+		},
+		"strings": {
+			"name": "appway.string.quoted.single",
+			"begin": "'",
+			"end": "'",
+			"patterns": [{
+				"name": "appway.constant.character.escape",
+				"match": "\\\\."
+			}]
+		}
+	}
+
+}
