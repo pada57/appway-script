@@ -3,7 +3,11 @@
     "displayName": "appway script",
     "description": "Appway Script Language support",
     "version": "0.0.1",
-    "publisher": "SJ",
+    "publisher": "sj-pictet-technologies",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/pada57/appway-script.git"
+    },
     "engines": {
         "vscode": "*"
     },
@@ -13,8 +17,16 @@
     "contributes": {
         "languages": [{
             "id": "appway",
-            "aliases": ["Appway Script", "appway-script"],
-            "extensions": ["apws", "appway", "apw", "appwaysc"],
+            "aliases": [
+                "Appway Script",
+                "appway-script"
+            ],
+            "extensions": [
+                "apws",
+                "appway",
+                "apw",
+                "appwaysc"
+            ],
             "configuration": "./language-configuration.json"
         }],
         "grammars": [{
@@ -22,5 +34,8 @@
             "scopeName": "source.appway",
             "path": "./syntaxes/appway.tmLanguage.json"
         }]
+    },
+    "dependencies": {
+        "npm": "^6.4.0"
     }
 }
