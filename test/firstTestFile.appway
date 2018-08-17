@@ -1,0 +1,65 @@
+// first appway script
+/*
+mutiline comment
+*/
+Local String $firstVariable;
+String $secondWithValue := 'foo';
+//
+If $test == true Then
+
+    /* this is to be done */
+ElseIf $test == false Then
+   $secondWithValue := bar;
+Else
+    $secondWithValue := 'bar bar';
+End
+//
+While true Do
+ 
+End
+//
+Script
+    //test
+End
+//
+Function foo(String $bar) : Nothing 
+Begin
+    Boolean $b := true;
+     For Integer $i := 1 Condition $i <= 10 Step $i := $i + 1 Do
+     
+    End 
+    //
+    ForEach Any $item In $collection Do
+        
+    End 
+    //
+    Try
+    
+        
+    Catch
+        /* error handling section */
+        LOGGER('error', JOIN('exception occurred: ', $exception.toString()));
+    Finally
+    /* this block will be executed before leaving the try (catch) block */
+    End 
+End
+//
+ DataClass MyStructure extends BaseStructure Begin 
+   /* .. */
+   Property[name, String, None, 'a simple text value'];
+   Property[nickNames, String, Indexed, 'an indexed collection of texts'];
+   Property[aliases, String, Named, 'a named collection of texts'];
+   /** 
+    Create the display text for an instance of 'MyStructure'
+    @param $message an arbitrary message
+    @return return the text to be displayed 
+    */
+   Function toDisplayText(String $message) : String Begin
+      /* .. */
+      String $local := JOIN($this.name, ' has nicknames ', JOINLIST($this.nickNames, ', '));
+      Return JOIN($message, '\n', $local);
+   End
+   /* .. */
+   MetaData['Generator', '{EXTENSION}'];
+   MetaData['Adapter-Version', '{EXTENSION_VERSION}'];
+End 

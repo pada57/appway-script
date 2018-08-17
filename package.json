@@ -33,6 +33,10 @@
             "language": "appway",
             "scopeName": "source.appway",
             "path": "./syntaxes/appway.tmLanguage.json"
+        }],
+        "snippets": [{
+            "language": "appway",
+            "path": "./snippets/appway.json"
         }]
     },
     "dependencies": {
