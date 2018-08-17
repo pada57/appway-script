@@ -2,93 +2,6 @@
 	"name": "appway",
 	"scopeName": "source.appway",
 	"patterns": [{
-			"begin": "\\b(package)\\b\\s*",
-			"beginCaptures": {
-				"1": {
-					"name": "keyword.other.package.java"
-				}
-			},
-			"end": "\\s*(;)",
-			"endCaptures": {
-				"1": {
-					"name": "punctuation.terminator.java"
-				}
-			},
-			"name": "meta.package.java",
-			"contentName": "storage.modifier.package.java",
-			"patterns": [{
-					"include": "#comments"
-				},
-				{
-					"match": "(?<=\\.)\\s*\\.|\\.(?=\\s*;)",
-					"name": "invalid.illegal.character_not_allowed_here.java"
-				},
-				{
-					"match": "(?<!_)_(?=\\s*(\\.|;))|\\b\\d+|-+",
-					"name": "invalid.illegal.character_not_allowed_here.java"
-				},
-				{
-					"match": "[A-Z]+",
-					"name": "invalid.deprecated.package_name_not_lowercase.java"
-				},
-				{
-					"match": "(?x)\\b(?<!\\$)\n(abstract|assert|boolean|break|byte|case|catch|char|class|\nconst|continue|default|do|double|else|enum|extends|final|\nfinally|float|for|goto|if|implements|import|instanceof|int|\ninterface|long|native|new|package|private|protected|public|\nreturn|short|static|strictfp|super|switch|syncronized|this|\nthrow|throws|transient|try|void|volatile|while|\ntrue|false|null)\\b",
-					"name": "invalid.illegal.character_not_allowed_here.java"
-				},
-				{
-					"match": "\\.",
-					"name": "punctuation.separator.java"
-				}
-			]
-		},
-		{
-			"begin": "\\b(import)\\b\\s*\\b(static)?\\b\\s",
-			"beginCaptures": {
-				"1": {
-					"name": "keyword.other.import.java"
-				},
-				"2": {
-					"name": "storage.modifier.java"
-				}
-			},
-			"end": "\\s*(;)",
-			"endCaptures": {
-				"1": {
-					"name": "punctuation.terminator.java"
-				}
-			},
-			"name": "meta.import.java",
-			"contentName": "storage.modifier.import.java",
-			"patterns": [{
-					"include": "#comments"
-				},
-				{
-					"match": "(?<=\\.)\\s*\\.|\\.(?=\\s*;)",
-					"name": "invalid.illegal.character_not_allowed_here.java"
-				},
-				{
-					"match": "(?<!\\.)\\s*\\*",
-					"name": "invalid.illegal.character_not_allowed_here.java"
-				},
-				{
-					"match": "(?<!_)_(?=\\s*(\\.|;))|\\b\\d+|-+",
-					"name": "invalid.illegal.character_not_allowed_here.java"
-				},
-				{
-					"match": "(?x)\\b(?<!\\$)\n(abstract|assert|boolean|break|byte|case|catch|char|class|\nconst|continue|default|do|double|else|enum|extends|final|\nfinally|float|for|goto|if|implements|import|instanceof|int|\ninterface|long|native|new|package|private|protected|public|\nreturn|short|static|strictfp|super|switch|syncronized|this|\nthrow|throws|transient|try|void|volatile|while|\ntrue|false|null)\\b",
-					"name": "invalid.illegal.character_not_allowed_here.java"
-				},
-				{
-					"match": "\\.",
-					"name": "punctuation.separator.java"
-				},
-				{
-					"match": "\\*",
-					"name": "variable.language.wildcard.java"
-				}
-			]
-		},
-		{
 			"include": "#comments-javadoc"
 		},
 		{
@@ -111,88 +24,11 @@
 				}
 			]
 		},
-		"annotations": {
-			"patterns": [{
-					"begin": "((@)[^\\s(]+)(\\()",
-					"beginCaptures": {
-						"1": {
-							"name": "storage.type.annotation.java"
-						},
-						"2": {
-							"name": "punctuation.definition.annotation.java"
-						},
-						"3": {
-							"name": "punctuation.definition.annotation-arguments.begin.bracket.round.java"
-						}
-					},
-					"end": "\\)",
-					"endCaptures": {
-						"0": {
-							"name": "punctuation.definition.annotation-arguments.end.bracket.round.java"
-						}
-					},
-					"name": "meta.declaration.annotation.java",
-					"patterns": [{
-							"captures": {
-								"1": {
-									"name": "constant.other.key.java"
-								},
-								"2": {
-									"name": "keyword.operator.assignment.java"
-								}
-							},
-							"match": "(\\w*)\\s*(=)"
-						},
-						{
-							"include": "#code"
-						}
-					]
-				},
-				{
-					"match": "(@)(interface)\\s+(\\w*)|((@)\\w*)",
-					"name": "meta.declaration.annotation.java",
-					"captures": {
-						"1": {
-							"name": "punctuation.definition.annotation.java"
-						},
-						"2": {
-							"name": "storage.modifier.java"
-						},
-						"3": {
-							"name": "storage.type.annotation.java"
-						},
-						"4": {
-							"name": "storage.type.annotation.java"
-						},
-						"5": {
-							"name": "punctuation.definition.annotation.java"
-						}
-					}
-				}
-			]
-		},
-		"anonymous-block-and-instance-initializer": {
-			"begin": "{",
-			"beginCaptures": {
-				"0": {
-					"name": "punctuation.section.block.begin.bracket.curly.java"
-				}
-			},
-			"end": "}",
-			"endCaptures": {
-				"0": {
-					"name": "punctuation.section.block.end.bracket.curly.java"
-				}
-			},
-			"patterns": [{
-				"include": "#code"
-			}]
-		},
 		"anonymous-classes-and-new": {
 			"begin": "\\bnew\\b",
 			"beginCaptures": {
 				"0": {
-					"name": "keyword.control.new.java"
+					"name": "keyword.control.new.appway"
 				}
 			},
 			"end": "(?=;|\\)|,|:|}|\\+)",
@@ -209,16 +45,16 @@
 					"begin": "(?<!\\])\\s*({)",
 					"beginCaptures": {
 						"1": {
-							"name": "punctuation.section.inner-class.begin.bracket.curly.java"
+							"name": "punctuation.section.inner-class.begin.bracket.curly.appway"
 						}
 					},
 					"end": "}",
 					"endCaptures": {
 						"0": {
-							"name": "punctuation.section.inner-class.end.bracket.curly.java"
+							"name": "punctuation.section.inner-class.end.bracket.curly.appway"
 						}
 					},
-					"name": "meta.inner-class.java",
+					"name": "meta.inner-class.appway",
 					"patterns": [{
 						"include": "#class-body"
 					}]
@@ -228,65 +64,39 @@
 				}
 			]
 		},
-		"assertions": {
-			"patterns": [{
-				"begin": "\\b(assert)\\s",
-				"beginCaptures": {
-					"1": {
-						"name": "keyword.control.assert.java"
-					}
-				},
-				"end": "$",
-				"name": "meta.declaration.assertion.java",
-				"patterns": [{
-						"match": ":",
-						"name": "keyword.operator.assert.expression-separator.java"
-					},
-					{
-						"include": "#code"
-					}
-				]
-			}]
-		},
 		"class": {
-			"begin": "(?=\\w?[\\w\\s]*(?:class|(?<!@)interface|enum)\\s+\\w+)",
-			"end": "}",
+			"begin": "(?=\\w?[\\w\\s]*(?:DataClass)\\s+\\w+)",
+			"end": "\\bEnd\\b",
 			"endCaptures": {
 				"0": {
-					"name": "punctuation.section.class.end.bracket.curly.java"
+					"name": "punctuation.section.class.end.bracket.curly.appway"
 				}
 			},
-			"name": "meta.class.java",
+			"name": "meta.class.appway",
 			"patterns": [{
-					"include": "#storage-modifiers"
-				},
-				{
-					"include": "#generics"
-				},
-				{
 					"include": "#comments"
 				},
 				{
 					"captures": {
 						"1": {
-							"name": "storage.modifier.java"
+							"name": "storage.modifier.appway"
 						},
 						"2": {
-							"name": "entity.name.type.class.java"
+							"name": "entity.name.type.class.appway"
 						}
 					},
-					"match": "(class|(?<!@)interface|enum)\\s+(\\w+)",
-					"name": "meta.class.identifier.java"
+					"match": "(DataClass)\\s+(\\w+)",
+					"name": "meta.class.identifier.appway"
 				},
 				{
 					"begin": "extends",
 					"beginCaptures": {
 						"0": {
-							"name": "storage.modifier.extends.java"
+							"name": "storage.modifier.extends.appway"
 						}
 					},
 					"end": "(?={|implements)",
-					"name": "meta.definition.class.inherited.classes.java",
+					"name": "meta.definition.class.inherited.classes.appway",
 					"patterns": [{
 							"include": "#object-types-inherited"
 						},
@@ -299,11 +109,11 @@
 					"begin": "(implements)\\s",
 					"beginCaptures": {
 						"1": {
-							"name": "storage.modifier.implements.java"
+							"name": "storage.modifier.implements.appway"
 						}
 					},
 					"end": "(?=\\s*extends|\\{)",
-					"name": "meta.definition.class.implemented.interfaces.java",
+					"name": "meta.definition.class.implemented.interfaces.appway",
 					"patterns": [{
 							"include": "#object-types-inherited"
 						},
@@ -313,14 +123,14 @@
 					]
 				},
 				{
-					"begin": "{",
+					"begin": "\\b(Begin)\\b",
 					"beginCaptures": {
 						"0": {
-							"name": "punctuation.section.class.begin.bracket.curly.java"
+							"name": "punctuation.section.class.begin.bracket.curly.appway"
 						}
 					},
-					"end": "(?=})",
-					"contentName": "meta.class.body.java",
+					"end": "\\b(?=End)\\b",
+					"contentName": "meta.class.body.appway",
 					"patterns": [{
 						"include": "#class-body"
 					}]
@@ -338,22 +148,10 @@
 					"include": "#class"
 				},
 				{
-					"include": "#enums"
-				},
-				{
-					"include": "#generics"
-				},
-				{
 					"include": "#methods"
 				},
 				{
-					"include": "#annotations"
-				},
-				{
 					"include": "#member-variables"
-				},
-				{
-					"include": "#storage-modifiers"
 				},
 				{
 					"include": "#code"
@@ -362,25 +160,13 @@
 		},
 		"code": {
 			"patterns": [{
-					"include": "#annotations"
-				},
-				{
 					"include": "#comments"
-				},
-				{
-					"include": "#enums"
 				},
 				{
 					"include": "#class"
 				},
 				{
-					"include": "#anonymous-block-and-instance-initializer"
-				},
-				{
 					"include": "#try-catch-finally"
-				},
-				{
-					"include": "#assertions"
 				},
 				{
 					"include": "#parens"
@@ -399,9 +185,6 @@
 				},
 				{
 					"include": "#keywords"
-				},
-				{
-					"include": "#storage-modifiers"
 				},
 				{
 					"include": "#method-call"
@@ -426,15 +209,15 @@
 				},
 				{
 					"match": ",",
-					"name": "punctuation.separator.delimiter.java"
+					"name": "punctuation.separator.delimiter.appway"
 				},
 				{
 					"match": "\\.",
-					"name": "punctuation.separator.period.java"
+					"name": "punctuation.separator.period.appway"
 				},
 				{
 					"match": ";",
-					"name": "punctuation.terminator.java"
+					"name": "punctuation.terminator.appway"
 				}
 			]
 		},
@@ -442,11 +225,11 @@
 			"patterns": [{
 					"captures": {
 						"0": {
-							"name": "punctuation.definition.comment.java"
+							"name": "punctuation.definition.comment.appway"
 						}
 					},
 					"match": "/\\*\\*/",
-					"name": "comment.block.empty.java"
+					"name": "comment.block.empty.appway"
 				},
 				{
 					"include": "text.html.javadoc"
@@ -461,17 +244,17 @@
 					"begin": "/\\*",
 					"captures": {
 						"0": {
-							"name": "punctuation.definition.comment.java"
+							"name": "punctuation.definition.comment.appway"
 						}
 					},
 					"end": "\\*/",
-					"name": "comment.block.java"
+					"name": "comment.block.appway"
 				},
 				{
 					"begin": "(^[ \\t]+)?(?=//)",
 					"beginCaptures": {
 						"1": {
-							"name": "punctuation.whitespace.comment.leading.java"
+							"name": "punctuation.whitespace.comment.leading.appway"
 						}
 					},
 					"end": "(?!\\G)",
@@ -479,11 +262,11 @@
 						"begin": "//",
 						"beginCaptures": {
 							"0": {
-								"name": "punctuation.definition.comment.java"
+								"name": "punctuation.definition.comment.appway"
 							}
 						},
 						"end": "\\n",
-						"name": "comment.line.double-slash.java"
+						"name": "comment.line.double-slash.appway"
 					}]
 				}
 			]
@@ -493,28 +276,28 @@
 				"begin": "^\\s*/\\*\\*(?!/)",
 				"beginCaptures": {
 					"0": {
-						"name": "punctuation.definition.comment.java"
+						"name": "punctuation.definition.comment.appway"
 					}
 				},
 				"end": "\\*/",
 				"endCaptures": {
 					"0": {
-						"name": "punctuation.definition.comment.java"
+						"name": "punctuation.definition.comment.appway"
 					}
 				},
-				"name": "comment.block.javadoc.java",
+				"name": "comment.block.javadoc.appway",
 				"patterns": [{
 						"match": "@(author|deprecated|return|see|serial|since|version)\\b",
-						"name": "keyword.other.documentation.javadoc.java"
+						"name": "keyword.other.documentation.javadoc.appway"
 					},
 					{
 						"match": "(@param)\\s+(\\S+)",
 						"captures": {
 							"1": {
-								"name": "keyword.other.documentation.javadoc.java"
+								"name": "keyword.other.documentation.javadoc.appway"
 							},
 							"2": {
-								"name": "variable.parameter.java"
+								"name": "variable.parameter.appway"
 							}
 						}
 					},
@@ -522,10 +305,10 @@
 						"match": "(@(?:exception|throws))\\s+(\\S+)",
 						"captures": {
 							"1": {
-								"name": "keyword.other.documentation.javadoc.java"
+								"name": "keyword.other.documentation.javadoc.appway"
 							},
 							"2": {
-								"name": "entity.name.type.class.java"
+								"name": "entity.name.type.class.appway"
 							}
 						}
 					},
@@ -533,13 +316,13 @@
 						"match": "{(@link)\\s+(\\S+)?#([\\w$]+\\s*\\([^\\(\\)]*\\)).*}",
 						"captures": {
 							"1": {
-								"name": "keyword.other.documentation.javadoc.java"
+								"name": "keyword.other.documentation.javadoc.appway"
 							},
 							"2": {
-								"name": "entity.name.type.class.java"
+								"name": "entity.name.type.class.appway"
 							},
 							"3": {
-								"name": "variable.parameter.java"
+								"name": "variable.parameter.appway"
 							}
 						}
 					}
@@ -549,209 +332,101 @@
 		"constants-and-special-vars": {
 			"patterns": [{
 					"match": "\\b(true|false|null)\\b",
-					"name": "constant.language.java"
+					"name": "constant.language.appway"
 				},
 				{
 					"match": "\\bthis\\b",
-					"name": "variable.language.this.java"
+					"name": "variable.language.this.appway"
 				},
 				{
 					"match": "\\bsuper\\b",
-					"name": "variable.language.java"
+					"name": "variable.language.appway"
 				}
 			]
 		},
-		"enums": {
-			"begin": "^\\s*(enum)\\s+(\\w+)",
-			"beginCaptures": {
-				"1": {
-					"name": "storage.modifier.java"
-				},
-				"2": {
-					"name": "entity.name.type.enum.java"
-				}
-			},
-			"end": "}",
-			"endCaptures": {
-				"0": {
-					"name": "punctuation.section.enum.end.bracket.curly.java"
-				}
-			},
-			"name": "meta.enum.java",
-			"patterns": [{
-					"begin": "{",
-					"beginCaptures": {
-						"0": {
-							"name": "punctuation.section.enum.begin.bracket.curly.java"
-						}
-					},
-					"end": "(?=})",
-					"patterns": [{
-							"match": "\\w+",
-							"name": "constant.other.enum.java"
-						},
-						{
-							"include": "#class-body"
-						}
-					]
-				},
-				{
-					"include": "#comments"
-				}
-			]
-		},
+
 		"function-call": {
 			"begin": "([A-Za-z_$][\\w$]*)\\s*(\\()",
 			"beginCaptures": {
 				"1": {
-					"name": "entity.name.function.java"
+					"name": "entity.name.function.appway"
 				},
 				"2": {
-					"name": "punctuation.definition.parameters.begin.bracket.round.java"
+					"name": "punctuation.definition.parameters.begin.bracket.round.appway"
 				}
 			},
 			"end": "\\)",
 			"endCaptures": {
 				"0": {
-					"name": "punctuation.definition.parameters.end.bracket.round.java"
+					"name": "punctuation.definition.parameters.end.bracket.round.appway"
 				}
 			},
-			"name": "meta.function-call.java",
+			"name": "meta.function-call.appway",
 			"patterns": [{
 				"include": "#code"
 			}]
 		},
-		"generics": {
-			"begin": "<",
-			"beginCaptures": {
-				"0": {
-					"name": "punctuation.bracket.angle.java"
-				}
-			},
-			"end": ">",
-			"endCaptures": {
-				"0": {
-					"name": "punctuation.bracket.angle.java"
-				}
-			},
-			"patterns": [{
-					"match": "\\b(extends|super)\\b",
-					"name": "storage.modifier.$1.java"
-				},
-				{
-					"match": "(?<!\\.)([a-zA-Z$_][a-zA-Z0-9$_]*)(?=\\s*<)",
-					"captures": {
-						"1": {
-							"name": "storage.type.java"
-						}
-					}
-				},
-				{
-					"include": "#primitive-arrays"
-				},
-				{
-					"match": "[a-zA-Z$_][a-zA-Z0-9$_]*",
-					"name": "storage.type.generic.java"
-				},
-				{
-					"match": "\\?",
-					"name": "storage.type.generic.wildcard.java"
-				},
-				{
-					"match": "&",
-					"name": "punctuation.separator.types.java"
-				},
-				{
-					"match": ",",
-					"name": "punctuation.separator.delimiter.java"
-				},
-				{
-					"match": "\\.",
-					"name": "punctuation.separator.period.java"
-				},
-				{
-					"include": "#parens"
-				},
-				{
-					"include": "#generics"
-				},
-				{
-					"include": "#comments"
-				}
-			]
-		},
 		"keywords": {
 			"patterns": [{
-					"match": "\\bthrow\\b",
-					"name": "keyword.control.throw.java"
+					"match": "\\b(Script|Begin|End)\\b",
+					"name": "keyword.block.appway"
 				},
 				{
-					"match": "\\?|:",
-					"name": "keyword.control.ternary.java"
+					"match": "\\b(DataClass|Function)\\b",
+					"name": "keyword.structure.appway"
 				},
 				{
-					"match": "\\b(return|break|case|continue|default|do|while|for|switch|if|else)\\b",
-					"name": "keyword.control.java"
-				},
-				{
-					"match": "\\b(instanceof)\\b",
-					"name": "keyword.operator.instanceof.java"
-				},
-				{
-					"match": "(<<|>>>?|~|\\^)",
-					"name": "keyword.operator.bitwise.java"
+					"match": "\\b(Return|Break|Continue|While|For|ForEach|Condition|In|Step|If|Else|ElseIf|Do)\\b",
+					"name": "keyword.control.appway"
 				},
 				{
 					"match": "((&|\\^|\\||<<|>>>?)=)",
-					"name": "keyword.operator.assignment.bitwise.java"
+					"name": "keyword.operator.assignment.bitwise.appway"
 				},
 				{
 					"match": "(===?|!=|<=|>=|<>|<|>)",
-					"name": "keyword.operator.comparison.java"
+					"name": "keyword.operator.comparison.appway"
 				},
 				{
 					"match": "([+*/%-]=)",
-					"name": "keyword.operator.assignment.arithmetic.java"
+					"name": "keyword.operator.assignment.arithmetic.appway"
 				},
 				{
 					"match": "(=)",
-					"name": "keyword.operator.assignment.java"
+					"name": "keyword.operator.assignment.appway"
 				},
 				{
 					"match": "(\\-\\-|\\+\\+)",
-					"name": "keyword.operator.increment-decrement.java"
+					"name": "keyword.operator.increment-decrement.appway"
 				},
 				{
 					"match": "(\\-|\\+|\\*|\\/|%)",
-					"name": "keyword.operator.arithmetic.java"
+					"name": "keyword.operator.arithmetic.appway"
 				},
 				{
 					"match": "(!|&&|\\|\\|)",
-					"name": "keyword.operator.logical.java"
+					"name": "keyword.operator.logical.appway"
 				},
 				{
 					"match": "(\\||&)",
-					"name": "keyword.operator.bitwise.java"
+					"name": "keyword.operator.bitwise.appway"
 				},
 				{
-					"match": "\\b(const|goto)\\b",
-					"name": "keyword.reserved.java"
+					"match": "\\b(Nothing|None|Synchronize)\\b",
+					"name": "keyword.reserved.appway"
 				}
 			]
 		},
 		"lambda-expression": {
 			"patterns": [{
 				"match": "->",
-				"name": "storage.type.function.arrow.java"
+				"name": "storage.type.function.arrow.appway"
 			}]
 		},
 		"member-variables": {
 			"begin": "(?=private|protected|public|native|synchronized|abstract|threadsafe|transient|static|final)",
 			"end": "(?=\\=|;)",
 			"patterns": [{
-					"include": "#storage-modifiers"
-				},
-				{
 					"include": "#variables"
 				},
 				{
@@ -766,22 +441,22 @@
 			"begin": "(\\.)\\s*([A-Za-z_$][\\w$]*)\\s*(\\()",
 			"beginCaptures": {
 				"1": {
-					"name": "punctuation.separator.period.java"
+					"name": "punctuation.separator.period.appway"
 				},
 				"2": {
-					"name": "entity.name.function.java"
+					"name": "entity.name.function.appway"
 				},
 				"3": {
-					"name": "punctuation.definition.parameters.begin.bracket.round.java"
+					"name": "punctuation.definition.parameters.begin.bracket.round.appway"
 				}
 			},
 			"end": "\\)",
 			"endCaptures": {
 				"0": {
-					"name": "punctuation.definition.parameters.end.bracket.round.java"
+					"name": "punctuation.definition.parameters.end.bracket.round.appway"
 				}
 			},
-			"name": "meta.method-call.java",
+			"name": "meta.method-call.appway",
 			"patterns": [{
 				"include": "#code"
 			}]
@@ -791,30 +466,27 @@
 			"end": "(})|(?=;)",
 			"endCaptures": {
 				"1": {
-					"name": "punctuation.section.method.end.bracket.curly.java"
+					"name": "punctuation.section.method.end.bracket.curly.appway"
 				}
 			},
-			"name": "meta.method.java",
+			"name": "meta.method.appway",
 			"patterns": [{
-					"include": "#storage-modifiers"
-				},
-				{
 					"begin": "(\\w+)\\s*(\\()",
 					"beginCaptures": {
 						"1": {
-							"name": "entity.name.function.java"
+							"name": "entity.name.function.appway"
 						},
 						"2": {
-							"name": "punctuation.definition.parameters.begin.bracket.round.java"
+							"name": "punctuation.definition.parameters.begin.bracket.round.appway"
 						}
 					},
 					"end": "\\)",
 					"endCaptures": {
 						"0": {
-							"name": "punctuation.definition.parameters.end.bracket.round.java"
+							"name": "punctuation.definition.parameters.end.bracket.round.appway"
 						}
 					},
-					"name": "meta.method.identifier.java",
+					"name": "meta.method.identifier.appway",
 					"patterns": [{
 							"include": "#parameters"
 						},
@@ -827,12 +499,9 @@
 					]
 				},
 				{
-					"include": "#generics"
-				},
-				{
 					"begin": "(?=\\w.*\\s+\\w+\\s*\\()",
 					"end": "(?=\\s+\\w+\\s*\\()",
-					"name": "meta.method.return-type.java",
+					"name": "meta.method.return-type.appway",
 					"patterns": [{
 							"include": "#all-types"
 						},
@@ -848,11 +517,11 @@
 					"begin": "{",
 					"beginCaptures": {
 						"0": {
-							"name": "punctuation.section.method.begin.bracket.curly.java"
+							"name": "punctuation.section.method.begin.bracket.curly.appway"
 						}
 					},
 					"end": "(?=})",
-					"contentName": "meta.method.body.java",
+					"contentName": "meta.method.body.appway",
 					"patterns": [{
 						"include": "#code"
 					}]
@@ -867,75 +536,72 @@
 			"end": "}",
 			"beginCaptures": {
 				"1": {
-					"name": "storage.modifier.java"
+					"name": "storage.modifier.appway"
 				},
 				"3": {
-					"name": "storage.modifier.java"
+					"name": "storage.modifier.appway"
 				},
 				"4": {
-					"name": "entity.name.type.module.java"
+					"name": "entity.name.type.module.appway"
 				}
 			},
 			"endCaptures": {
 				"0": {
-					"name": "punctuation.section.module.end.bracket.curly.java"
+					"name": "punctuation.section.module.end.bracket.curly.appway"
 				}
 			},
-			"name": "meta.module.java",
+			"name": "meta.module.appway",
 			"patterns": [{
 				"begin": "{",
 				"beginCaptures": {
 					"0": {
-						"name": "punctuation.section.module.begin.bracket.curly.java"
+						"name": "punctuation.section.module.begin.bracket.curly.appway"
 					}
 				},
 				"end": "(?=})",
-				"contentName": "meta.module.body.java",
+				"contentName": "meta.module.body.appway",
 				"patterns": [{
 					"match": "\\b(requires|transitive|exports|opens|to|uses|provides|with)\\b",
-					"name": "keyword.module.java"
+					"name": "keyword.module.appway"
 				}]
 			}]
 		},
 		"numbers": {
 			"patterns": [{
 					"match": "(?x)\n\\b(?<!\\$)\n0(x|X)\n(\n  (?<!\\.)[0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?[Ll]?(?!\\.)\n  |\n  (\n    [0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?\\.?\n    |\n    ([0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?)?\\.[0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?\n  )\n  [Pp][+-]?[0-9]([0-9_]*[0-9])?[FfDd]?\n)\n\\b(?!\\$)",
-					"name": "constant.numeric.hex.java"
+					"name": "constant.numeric.hex.appway"
 				},
 				{
 					"match": "\\b(?<!\\$)0(b|B)[01]([01_]*[01])?[Ll]?\\b(?!\\$)",
-					"name": "constant.numeric.binary.java"
+					"name": "constant.numeric.binary.appway"
 				},
 				{
 					"match": "\\b(?<!\\$)0[0-7]([0-7_]*[0-7])?[Ll]?\\b(?!\\$)",
-					"name": "constant.numeric.octal.java"
+					"name": "constant.numeric.octal.appway"
 				},
 				{
 					"match": "(?x)\n(?<!\\$)\n(\n  \\b[0-9]([0-9_]*[0-9])?\\.\\B(?!\\.)\n  |\n  \\b[0-9]([0-9_]*[0-9])?\\.([Ee][+-]?[0-9]([0-9_]*[0-9])?)[FfDd]?\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?\\.([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?\\.([0-9]([0-9_]*[0-9])?)([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]?\\b\n  |\n  (?<!\\.)\\B\\.[0-9]([0-9_]*[0-9])?([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]?\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?([Ee][+-]?[0-9]([0-9_]*[0-9])?)[FfDd]?\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]\\b\n  |\n  \\b(0|[1-9]([0-9_]*[0-9])?)(?!\\.)[Ll]?\\b\n)\n(?!\\$)",
-					"name": "constant.numeric.decimal.java"
+					"name": "constant.numeric.decimal.appway"
 				}
 			]
 		},
 		"object-types": {
 			"patterns": [{
-					"include": "#generics"
-				},
-				{
 					"begin": "\\b((?:[A-Za-z]\\w*\\s*\\.\\s*)*)([A-Z]\\w*)\\s*(?=\\[)",
 					"beginCaptures": {
 						"1": {
 							"patterns": [{
 									"match": "[A-Za-z]\\w*",
-									"name": "storage.type.java"
+									"name": "storage.type.appway"
 								},
 								{
 									"match": "\\.",
-									"name": "punctuation.separator.period.java"
+									"name": "punctuation.separator.period.appway"
 								}
 							]
 						},
 						"2": {
-							"name": "storage.type.object.array.java"
+							"name": "storage.type.object.array.appway"
 						}
 					},
 					"end": "(?!\\s*\\[)",
@@ -953,11 +619,11 @@
 						"1": {
 							"patterns": [{
 									"match": "[A-Za-z]\\w*",
-									"name": "storage.type.java"
+									"name": "storage.type.appway"
 								},
 								{
 									"match": "\\.",
-									"name": "punctuation.separator.period.java"
+									"name": "punctuation.separator.period.appway"
 								}
 							]
 						}
@@ -969,11 +635,11 @@
 						"1": {
 							"patterns": [{
 									"match": "[A-Za-z]\\w*",
-									"name": "storage.type.java"
+									"name": "storage.type.appway"
 								},
 								{
 									"match": "\\.",
-									"name": "punctuation.separator.period.java"
+									"name": "punctuation.separator.period.appway"
 								}
 							]
 						}
@@ -983,34 +649,28 @@
 		},
 		"object-types-inherited": {
 			"patterns": [{
-					"include": "#generics"
-				},
-				{
 					"match": "\\b(?:[A-Z]\\w*\\s*(\\.)\\s*)*[A-Z]\\w*\\b",
-					"name": "entity.other.inherited-class.java",
+					"name": "entity.other.inherited-class.appway",
 					"captures": {
 						"1": {
-							"name": "punctuation.separator.period.java"
+							"name": "punctuation.separator.period.appway"
 						}
 					}
 				},
 				{
 					"match": ",",
-					"name": "punctuation.separator.delimiter.java"
+					"name": "punctuation.separator.delimiter.appway"
 				}
 			]
 		},
 		"objects": {
 			"match": "(?<![\\w$])[a-zA-Z_$][\\w$]*(?=\\s*\\.\\s*[\\w$]+)",
-			"name": "variable.other.object.java"
+			"name": "variable.other.object.appway"
 		},
 		"parameters": {
 			"patterns": [{
 					"match": "\\bfinal\\b",
-					"name": "storage.modifier.java"
-				},
-				{
-					"include": "#annotations"
+					"name": "storage.modifier.appway"
 				},
 				{
 					"include": "#all-types"
@@ -1020,15 +680,15 @@
 				},
 				{
 					"match": "\\w+",
-					"name": "variable.parameter.java"
+					"name": "variable.parameter.appway"
 				},
 				{
 					"match": ",",
-					"name": "punctuation.separator.delimiter.java"
+					"name": "punctuation.separator.delimiter.appway"
 				},
 				{
 					"match": "\\.\\.\\.",
-					"name": "punctuation.definition.parameters.varargs.java"
+					"name": "punctuation.definition.parameters.varargs.appway"
 				}
 			]
 		},
@@ -1037,13 +697,13 @@
 					"begin": "\\(",
 					"beginCaptures": {
 						"0": {
-							"name": "punctuation.bracket.round.java"
+							"name": "punctuation.bracket.round.appway"
 						}
 					},
 					"end": "\\)",
 					"endCaptures": {
 						"0": {
-							"name": "punctuation.bracket.round.java"
+							"name": "punctuation.bracket.round.appway"
 						}
 					},
 					"patterns": [{
@@ -1054,13 +714,13 @@
 					"begin": "\\[",
 					"beginCaptures": {
 						"0": {
-							"name": "punctuation.bracket.square.java"
+							"name": "punctuation.bracket.square.appway"
 						}
 					},
 					"end": "\\]",
 					"endCaptures": {
 						"0": {
-							"name": "punctuation.bracket.square.java"
+							"name": "punctuation.bracket.square.appway"
 						}
 					},
 					"patterns": [{
@@ -1071,13 +731,13 @@
 					"begin": "{",
 					"beginCaptures": {
 						"0": {
-							"name": "punctuation.bracket.curly.java"
+							"name": "punctuation.bracket.curly.appway"
 						}
 					},
 					"end": "}",
 					"endCaptures": {
 						"0": {
-							"name": "punctuation.bracket.curly.java"
+							"name": "punctuation.bracket.curly.appway"
 						}
 					},
 					"patterns": [{
@@ -1091,7 +751,7 @@
 				"begin": "\\b(Indexed)\\b\\s+(Any|Boolean|Integer|Double|Float|Long|String)\\b\\s*",
 				"beginCaptures": {
 					"1": {
-						"name": "storage.type.primitive.array.java"
+						"name": "storage.type.primitive.array.appway"
 					}
 				},
 				"end": "(?!\\s*\\[)",
@@ -1106,17 +766,17 @@
 		},
 		"primitive-types": {
 			"match": "\\b(Any|Boolean|Date|String)\\b",
-			"name": "storage.type.primitive.java"
+			"name": "storage.type.primitive.appway"
 		},
 		"properties": {
 			"patterns": [{
 					"match": "(\\.)\\s*([a-zA-Z_$][\\w$]*)(?=\\s*\\.\\s*[a-zA-Z_$][\\w$]*)",
 					"captures": {
 						"1": {
-							"name": "punctuation.separator.period.java"
+							"name": "punctuation.separator.period.appway"
 						},
 						"2": {
-							"name": "variable.other.object.property.java"
+							"name": "variable.other.object.property.appway"
 						}
 					}
 				},
@@ -1124,10 +784,10 @@
 					"match": "(\\.)\\s*([a-zA-Z_$][\\w$]*)",
 					"captures": {
 						"1": {
-							"name": "punctuation.separator.period.java"
+							"name": "punctuation.separator.period.appway"
 						},
 						"2": {
-							"name": "variable.other.property.java"
+							"name": "variable.other.property.appway"
 						}
 					}
 				},
@@ -1135,56 +795,52 @@
 					"match": "(\\.)\\s*([0-9][\\w$]*)",
 					"captures": {
 						"1": {
-							"name": "punctuation.separator.period.java"
+							"name": "punctuation.separator.period.appway"
 						},
 						"2": {
-							"name": "invalid.illegal.identifier.java"
+							"name": "invalid.illegal.identifier.appway"
 						}
 					}
 				}
 			]
-		},
-		"storage-modifiers": {
-			"match": "\\b(public|private|protected|static|final|native|synchronized|abstract|threadsafe|transient|volatile|default|strictfp)\\b",
-			"name": "storage.modifier.java"
 		},
 		"strings": {
 			"patterns": [{
 					"begin": "\"",
 					"beginCaptures": {
 						"0": {
-							"name": "punctuation.definition.string.begin.java"
+							"name": "punctuation.definition.string.begin.appway"
 						}
 					},
 					"end": "\"",
 					"endCaptures": {
 						"0": {
-							"name": "punctuation.definition.string.end.java"
+							"name": "punctuation.definition.string.end.appway"
 						}
 					},
-					"name": "string.quoted.double.java",
+					"name": "string.quoted.double.appway",
 					"patterns": [{
 						"match": "\\\\.",
-						"name": "constant.character.escape.java"
+						"name": "constant.character.escape.appway"
 					}]
 				},
 				{
 					"begin": "'",
 					"beginCaptures": {
 						"0": {
-							"name": "punctuation.definition.string.begin.java"
+							"name": "punctuation.definition.string.begin.appway"
 						}
 					},
 					"end": "'",
 					"endCaptures": {
 						"0": {
-							"name": "punctuation.definition.string.end.java"
+							"name": "punctuation.definition.string.end.appway"
 						}
 					},
-					"name": "string.quoted.single.java",
+					"name": "string.quoted.single.appway",
 					"patterns": [{
 						"match": "\\\\.",
-						"name": "constant.character.escape.java"
+						"name": "constant.character.escape.appway"
 					}]
 				}
 			]
@@ -1193,164 +849,63 @@
 			"begin": "throws",
 			"beginCaptures": {
 				"0": {
-					"name": "storage.modifier.java"
+					"name": "storage.modifier.appway"
 				}
 			},
 			"end": "(?={|;)",
-			"name": "meta.throwables.java",
+			"name": "meta.throwables.appway",
 			"patterns": [{
 					"match": ",",
-					"name": "punctuation.separator.delimiter.java"
+					"name": "punctuation.separator.delimiter.appway"
 				},
 				{
 					"match": "[a-zA-Z$_][\\.a-zA-Z0-9$_]*",
-					"name": "storage.type.java"
+					"name": "storage.type.appway"
 				}
 			]
 		},
 		"try-catch-finally": {
 			"patterns": [{
-					"begin": "\\btry\\b",
+					"begin": "\\bTry\\b",
 					"beginCaptures": {
 						"0": {
-							"name": "keyword.control.try.java"
+							"name": "keyword.control.try.appway"
 						}
 					},
-					"end": "}",
-					"endCaptures": {
-						"0": {
-							"name": "punctuation.section.try.end.bracket.curly.java"
-						}
-					},
-					"name": "meta.try.java",
+					"name": "meta.try.appway",
 					"patterns": [{
-							"begin": "\\(",
-							"beginCaptures": {
-								"0": {
-									"name": "punctuation.section.try.resources.begin.bracket.round.java"
-								}
-							},
-							"end": "\\)",
-							"endCaptures": {
-								"0": {
-									"name": "punctuation.section.try.resources.end.bracket.round.java"
-								}
-							},
-							"name": "meta.try.resources.java",
-							"patterns": [{
-								"include": "#code"
-							}]
-						},
-						{
-							"begin": "{",
-							"beginCaptures": {
-								"0": {
-									"name": "punctuation.section.try.begin.bracket.curly.java"
-								}
-							},
-							"end": "(?=})",
-							"contentName": "meta.try.body.java",
-							"patterns": [{
-								"include": "#code"
-							}]
-						}
-					]
+						"include": "#code"
+					}]
 				},
 				{
-					"begin": "\\b(catch)\\b\\s*(?=\\(\\s*[^\\s]+\\s*[^)]+\\))",
+					"begin": "\\b(Catch)\\b",
 					"beginCaptures": {
-						"1": {
-							"name": "keyword.control.catch.java"
-						}
-					},
-					"end": "}",
-					"endCaptures": {
 						"0": {
-							"name": "punctuation.section.catch.end.bracket.curly.java"
+							"name": "keyword.control.catch.appway"
 						}
 					},
-					"name": "meta.catch.java",
+					"name": "meta.catch.appway",
 					"patterns": [{
-							"begin": "\\(",
-							"beginCaptures": {
-								"0": {
-									"name": "punctuation.definition.parameters.begin.bracket.round.java"
-								}
-							},
-							"end": "\\)",
-							"endCaptures": {
-								"0": {
-									"name": "punctuation.definition.parameters.end.bracket.round.java"
-								}
-							},
-							"contentName": "meta.catch.parameters.java",
-							"patterns": [{
-									"include": "#comments"
-								},
-								{
-									"match": "\\|",
-									"name": "punctuation.catch.separator.java"
-								},
-								{
-									"match": "([a-zA-Z$_][\\.a-zA-Z0-9$_]*)\\s*(\\w+)?",
-									"captures": {
-										"1": {
-											"name": "storage.type.java"
-										},
-										"2": {
-											"name": "variable.parameter.java"
-										}
-									}
-								}
-							]
-						},
-						{
-							"begin": "{",
-							"beginCaptures": {
-								"0": {
-									"name": "punctuation.section.catch.begin.bracket.curly.java"
-								}
-							},
-							"end": "(?=})",
-							"contentName": "meta.catch.body.java",
-							"patterns": [{
-								"include": "#code"
-							}]
-						}
-					]
+						"include": "#code"
+					}]
 				},
 				{
-					"begin": "\\bfinally\\b",
+					"begin": "\\bFinally\\b",
 					"beginCaptures": {
 						"0": {
-							"name": "keyword.control.finally.java"
+							"name": "keyword.control.finally.appway"
 						}
 					},
-					"end": "}",
-					"endCaptures": {
-						"0": {
-							"name": "punctuation.section.finally.end.bracket.curly.java"
-						}
-					},
-					"name": "meta.finally.java",
+
+					"name": "meta.finally.appway",
 					"patterns": [{
-						"begin": "{",
-						"beginCaptures": {
-							"0": {
-								"name": "punctuation.section.finally.begin.bracket.curly.java"
-							}
-						},
-						"end": "(?=})",
-						"contentName": "meta.finally.body.java",
-						"patterns": [{
-							"include": "#code"
-						}]
+						"include": "#code"
 					}]
 				}
 			]
 		},
 		"variables": {
-			"begin": "(?x)\n(?=\n  (\n    (void|boolean|byte|char|short|float|long|double)\n    |\n    (?>(\\w+\\.)*[A-Z]+\\w*) # e.g. `javax.ws.rs.Response`, or `String`\n  )\n  (\n    <[\\w<>,\\.?\\s\\[\\]]*> # e.g. `HashMap<Integer, String>`, or `List<java.lang.String>`\n  )?\n  (\n    (\\[\\])* # int[][]\n  )?\n  \\s+\n  [A-Za-z_$][\\w$]* # At least one identifier after space\n  ([\\w\\[\\],$][\\w\\[\\],\\s]*)? # possibly primitive array or additional identifiers\n  \\s*(=|;)\n)",
+			"begin": "(?x)\n(?=\n  (\n    (void|boolean|byte|char|short|int|float|long|double)\n    |\n    (?>(\\w+\\.)*[A-Z]+\\w*) # e.g. `javax.ws.rs.Response`, or `String`\n  )\n  (\n    <[\\w<>,\\.?\\s\\[\\]]*> # e.g. `HashMap<Integer, String>`, or `List<java.lang.String>`\n  )?\n  (\n    (\\[\\])* # int[][]\n  )?\n  \\s+\n  [A-Za-z_$][\\w$]* # At least one identifier after space\n  ([\\w\\[\\],$][\\w\\[\\],\\s]*)? # possibly primitive array or additional identifiers\n  \\s*(=|;)\n)",
 			"end": "(?=\\=|;)",
 			"name": "meta.definition.variable.java",
 			"patterns": [{
