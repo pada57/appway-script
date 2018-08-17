@@ -1,0 +1,60 @@
+{
+    "If": {
+        "prefix": "if",
+        "body": [
+            "If $1 Then",
+            "\t$0",
+            "End"
+        ],
+        "description": "Simple If"
+    },
+    "IfElse": {
+        "prefix": "ife",
+        "body": [
+            "If $1 Then",
+            "\t$2",
+            "Else",
+            "\t$0",
+            "End"
+        ],
+        "description": "If Else"
+    },
+    "IfElsif": {
+        "prefix": "ifelif",
+        "body": [
+            "If $1 Then",
+            "\t$2",
+            "ElsIf $3 Then",
+            "\t$0",
+            "End"
+        ],
+        "description": "If Elsif"
+    },
+    "For": {
+        "prefix": "for",
+        "body": [
+            "For Integer $1 := 0 Condition $1 <= $2 Step $1 := $1 + 1 Do",
+            "\t$0",
+            "End"
+        ],
+        "description": "For Loop"
+    },
+    "ForEach": {
+        "prefix": "fore",
+        "body": [
+            "ForEach Any $2 In $1 Do",
+            "\t$0",
+            "End"
+        ],
+        "description": "For Each"
+    },
+    "test()": {
+        "prefix": "tt",
+        "body": [
+            "void test$1() {",
+            "\t$0",
+            "}"
+        ],
+        "description": "test method"
+    }
+}
